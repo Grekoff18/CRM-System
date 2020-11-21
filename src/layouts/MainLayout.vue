@@ -1,64 +1,12 @@
 <template>
     <div class="app-main-layout">
-        <nav class="navbar orange lighten-1">           
-            <div class="nav-wrapper">
 
-                <!-- Left navbar section -->
-                <div class="navbar-left">
-                    <a href="#">
-                    <i class="material-icons black-text">dehaze</i>
-                    </a>
-                    <span class="black-text">12.12.12</span>
-                </div>
+        <NavBar @click="isOpen = !isOpen" />
 
-                <ul class="right hide-on-small-and-down">
-                    <li>
-                        <a class="dropdown-trigger black-text" href="#" data-target="dropdown"> USER NAME
-                            <i class="material-icons right">arrow_drop_down</i>
-                        </a>
-
-                        <!-- DropDown section -->
-                        <ul id='dropdown' class='dropdown-content'>
-                            <li>
-                                <a href="#" class="black-text">
-                                    <i class="material-icons">account_circle</i>Профиль
-                                </a>
-                            </li>
-
-                            <li class="divider" tabindex="-1"></li>
-
-                            <li>
-                                <a href="#" class="black-text">
-                                    <i class="material-icons">assignment_return</i>Выйти
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>        
-            </div>
-        </nav>
-
-        <!-- Side-nav section -->
-        <ul class="sidenav app-sidenav open">
-            <li>
-                <a href="#" class="waves-effect waves-orange pointer">Счет</a>
-            </li>
-            <li>
-                <a href="#" class="waves-effect waves-orange pointer">История</a>
-            </li>
-            <li>
-                <a href="#" class="waves-effect waves-orange pointer">Планирование</a>
-            </li>
-            <li>
-                <a href="#" class="waves-effect waves-orange pointer">Новая запись</a>
-            </li>
-            <li>
-                <a href="#" class="waves-effect waves-orange pointer">Категории</a>
-            </li>
-        </ul>
+        <SideBar v-model="isOpen"/>
 
         <!-- Main content section -->
-        <main class="app-content">
+        <main class="app-content" :class="isOpen ? '' : 'full'">
             <div class="app-page">
                 <router-view/>
             </div>
@@ -72,3 +20,20 @@
 
     </div>    
 </template>
+
+<script>
+import NavBar from "../components/app/NavBar";
+import SideBar from "../components/app/SideBar";
+
+export default {
+    name: "main-layout",
+    components: {
+        NavBar, SideBar
+    },
+    data () {
+        return {
+            isOpen: true,    
+        }
+    }
+}
+</script>
