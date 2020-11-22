@@ -10,17 +10,17 @@
 
 <script>
 export default {
-    props: ["value"],
-    data () {
-        return {
-            links: [
-                {title: "Счет", url: "/"},
-                {title: "История", url: "/history"},
-                {title: "Планирование", url: "/planning"},
-                {title: "Новая запись", url: "/record"},
-                {title: "Категории", url: "/categories"},   
-            ]
-        }
-    },
-}
+  props: ["value"],
+  data() {
+    return {
+      links: [
+        {title: "Счет", url: "/"},
+        {title: "История", url: "/history"},
+        {title: "Планирование", url: "/planning"},
+        {title: "Новая запись", url: "/record"},
+        {title: "Категории", url: "/categories"},
+      ]
+    }
+  },
+};
 </script>

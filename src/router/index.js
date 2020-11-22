@@ -11,7 +11,7 @@ const routes = [
       layout: "main"
     },
     component: () => import("../views/Home.vue")
-  },  
+  },
   {
     path: '/login',
     name: 'login',
@@ -76,7 +76,8 @@ const routes = [
     },
     component: () => import("../views/Register.vue")
   },
-]
+];
+
 
 const router = new VueRouter({
   mode: 'history',

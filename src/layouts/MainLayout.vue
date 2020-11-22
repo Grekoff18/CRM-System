@@ -1,8 +1,6 @@
 <template>
     <div class="app-main-layout">
-
         <NavBar @click="isOpen = !isOpen" />
-
         <SideBar v-model="isOpen"/>
 
         <!-- Main content section -->
@@ -13,27 +11,28 @@
         </main>
 
         <div class="fixed-action-btn">
-            <a class="btn-floating btn-large blue" href="#">
+            <router-link class="btn-floating btn-large blue" to="/record">
                 <i class="large material-icons">add</i>
-            </a>
+            </router-link>
         </div>
 
     </div>    
 </template>
 
 <script>
-import NavBar from "../components/app/NavBar";
-import SideBar from "../components/app/SideBar";
+import NavBar from "../components/app/NavBar"
+import SideBar from "../components/app/SideBar"
 
 export default {
-    name: "main-layout",
-    components: {
-        NavBar, SideBar
-    },
-    data () {
-        return {
-            isOpen: true,    
-        }
+  name: "main-layout",
+  components: {
+    NavBar, SideBar
+  },
+  data() {
+    return {
+      isOpen: true,
     }
-}
+  }
+};
+
 </script>
