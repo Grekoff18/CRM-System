@@ -2,9 +2,11 @@
     <nav class="navbar orange lighten-1">           
             <div class="nav-wrapper">
 
-                <!-- Left navbar section -->
                 <div class="navbar-left">
-                    <a href="#" @click.prevent="$emit('click')">
+                    <a
+                      href="#"
+                      @click.prevent="$emit('click')"
+                    >
                         <i class="material-icons black-text">dehaze</i>
                     </a>
                     <span class="black-text">{{date | date("datetime")}}</span>
@@ -16,7 +18,6 @@
                             <i class="material-icons right">arrow_drop_down</i>
                         </a>
 
-                        <!-- DropDown section -->
                         <ul id='dropdown' class='dropdown-content'>
                             <li>
                                 <router-link to="/profile" class="black-text">

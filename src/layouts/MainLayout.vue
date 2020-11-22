@@ -3,8 +3,10 @@
         <NavBar @click="isOpen = !isOpen" />
         <SideBar v-model="isOpen"/>
 
-        <!-- Main content section -->
-        <main class="app-content" :class="isOpen ? '' : 'full'">
+        <main
+          class="app-content"
+          :class="isOpen ? '' : 'full'"
+        >
             <div class="app-page">
                 <router-view/>
             </div>
