@@ -51,7 +51,9 @@ export default {
 	
   methods: {
 		// When the user is logged out, we will write down some query parameters.
-    logout() {
+    async logout() {
+			// adding logout action
+			await this.$store.dispatch("logout")
       this.$router.push("/login?message=logout")
     }
 	},

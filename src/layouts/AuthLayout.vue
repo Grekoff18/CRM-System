@@ -3,3 +3,19 @@
         <router-view/> 
     </div>
 </template>
+
+<script>
+export default {
+	computed: {
+		error() {
+			return this.$store.getters.error
+		}
+	},
+
+	watch: {
+		error(firebaseError) {
+			this.$error(firebaseError.message)	
+		}
+	},
+}
+</script>
