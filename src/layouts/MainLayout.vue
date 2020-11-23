@@ -17,7 +17,7 @@
                 <i class="large material-icons">add</i>
             </router-link>
         </div>
-
+  
     </div>    
 </template>
 

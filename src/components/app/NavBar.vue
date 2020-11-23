@@ -47,22 +47,29 @@ export default {
       interval: null,
       dropdown: null,
     }
-  },
+	},
+	
   methods: {
+		// When the user is logged out, we will write down some query parameters.
     logout() {
       this.$router.push("/login?message=logout")
     }
-  },
+	},
+	
   // Vue hooks
   mounted() {
     this.interval = setInterval(() => {
       this.date = new Date()
-    }, 1000)
+		}, 1000)
+		
+		// Initialize materialize dropdown plugin
     this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
       constrainWidth: false
     })
-  },
+	},
+	
   beforeDestroy() {
+		// To optimize our application, we destroy the date timer and dropdown plugin
     clearInterval(this.interval)
     if (this.dropdown && this.dropdown.destroy) {
       this.dropdown.destroy()

@@ -55,30 +55,49 @@
 </template>
 
 <script>
+// import vuelidate api for validate our form
 import {email, required, minLength} from "vuelidate/lib/validators"
+// import messages for our plugins
+import messages from "@/common/messages"
 
 export default {
-  name: "login",
+	name: "login",
+	
   data () {
     return {
       email: "",
       password: "",
     }
-  },
+	},
+	
+	// Configuring checks for our inputs
   validations: {
     email: {email, required},
     password: {required, minLength: minLength(6)},
-  },
+	},
+
+	// When the user logs out, we warn them about what they have done.
+	mounted() { 
+		if (messages[this.$route.query.message]) {
+			this.$message(messages[this.$route.query.message])
+		}
+	},
+
   methods: {
+		// Form validation
     submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
-      }
+			}
+			
+			// If the form is valid, save the form data
       const formData = {
         email: this.email,
         password: this.password,
-      }
+			}
+			
+			// Redirect on main page
       this.$router.push("/")
     }
   }
