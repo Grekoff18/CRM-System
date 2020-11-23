@@ -85,7 +85,7 @@ export default {
 
   methods: {
 		// Form validation
-    submitHandler() {
+    async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
@@ -96,9 +96,13 @@ export default {
         email: this.email,
         password: this.password,
 			}
-			
-			// Redirect on main page
-      this.$router.push("/")
+
+			try {
+				await this.$store.dispatch("login", formData)
+				this.$router.push("/")
+			} catch(e) {
+
+			}
     }
   }
 }
