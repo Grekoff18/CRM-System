@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import dateFilter from '@/filters/date.filter'
 import messagePlugin from '@/common/message.plugin'
+import Loader from '@/components/app/Loader'
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min.js'
 import 'firebase/auth'
@@ -44,5 +45,8 @@ Vue.use(messagePlugin)
 
 // Register new filter in Vue
 Vue.filter("date", dateFilter)
+
+// Register vue component
+Vue.component("Loader", Loader)
 
 
