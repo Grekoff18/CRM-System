@@ -19,8 +19,8 @@ export default {
     async fetchInfo({dispatch, commit}) {
       try {
         let uid = await dispatch("getUserId")
-        let info = (await firebase.database().ref(`/users/${uid}/info`).once("value")).val()
-        commit("setInfo", info)
+        let info = await firebase.database().ref(`/users/${uid}/info`).once("value")
+        commit("setInfo", info.val())
       } catch (e) {
 
       }

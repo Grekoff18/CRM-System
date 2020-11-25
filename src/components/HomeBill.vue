@@ -34,7 +34,7 @@ export default {
 
   methods: {
     getCurrency(currency) {
-     return Math.floor(this.base * this.rates[currency])
+      return Math.floor(this.base * this.rates[currency])
     }
   }
 }
