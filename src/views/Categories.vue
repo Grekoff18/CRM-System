@@ -33,8 +33,7 @@ export default {
   methods: {
     addNewCategory(category) {
       this.categories.push(category)
-      console.log(this.categories)
     }
-  }
+	}
 }
 </script>

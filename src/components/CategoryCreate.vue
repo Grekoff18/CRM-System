@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       title: "",
-      limit: 1,
+      limit: null,
     }
   },
 
@@ -82,11 +82,12 @@ export default {
         const category = await this.$store.dispatch("createCategory", {
           title: this.title,
           limit: this.limit,
-        })
+				})
         this.title = ""
-        this.limit = 100
-        this.$v.reset()
-        this.$emit("created", category)
+        this.limit = this.$v.limit.$params.minValue.min
+        this.$message("Category created")
+				this.$emit("created", category)
+				this.$v.reset()
       } catch (e) {}
     },
   },
