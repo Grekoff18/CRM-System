@@ -112,7 +112,19 @@ export default {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
-      }
+			}
+
+			let categoryData = {
+				id: this.current,
+				title: this.title,
+				limit: this.limit,
+			}
+			
+			try {
+        const category = await this.$store.dispatch("refreshCategory", categoryData)
+				this.$emit("updated", categoryData)
+				this.$message("Category updated successfully")
+      } catch (e) {}
     },
 	},
 	
