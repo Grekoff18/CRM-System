@@ -27,12 +27,14 @@ export default {
   },
 
   computed: {
+		// Compute base bill whose we have 
     base() {
       return this.$store.getters.info.bill / (this.rates["UAH"] / this.rates["EUR"])
     }
   },
 
   methods: {
+		// Computing our bill in other currencies
     getCurrency(currency) {
       return Math.floor(this.base * this.rates[currency])
     }

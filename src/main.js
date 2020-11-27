@@ -5,7 +5,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import dateFilter from '@/filters/date.filter'
-import currencyFilter from "@/filters/currency.filter";
+import currencyFilter from '@/filters/currency.filter'
+import tooltipDirectives from '@/directives/tooltip.directive'
 import messagePlugin from '@/common/message.plugin'
 import Loader from '@/components/app/Loader'
 import './registerServiceWorker'
@@ -14,7 +15,6 @@ import 'firebase/auth'
 import 'firebase/database'
 
 let app
-
 const firebaseConfig = {
 	apiKey: "AIzaSyA9wxKt0XnQOShVQ3t0LvCNTkIC1DtfPWg",
 	authDomain: "crm--vue--js.firebaseapp.com",
@@ -50,5 +50,8 @@ Vue.filter("currency", currencyFilter)
 
 // Register vue component
 Vue.component("Loader", Loader)
+
+// Register directives
+Vue.directive("tooltip", tooltipDirectives)
 
 

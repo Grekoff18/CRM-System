@@ -48,6 +48,7 @@
 </template>
 
 <script>
+// Importing different plugins for validating input fields
 import {required, minValue} from 'vuelidate/lib/validators'
 
 export default {
@@ -60,6 +61,7 @@ export default {
     }
   },
 
+	// Set up for validating our input fields
   validations: {
     title: {required},
     limit: {minValue: minValue(100)}
@@ -79,21 +81,21 @@ export default {
       }
 
       try {
+				// Send some info to store for create new category
         const category = await this.$store.dispatch("createCategory", {
           title: this.title,
           limit: this.limit,
 				})
+
+				// After sending set to zero other info about category in fields
         this.title = ""
         this.limit = this.$v.limit.$params.minValue.min
         this.$message("Category created")
 				this.$emit("created", category)
+				// Reset all validation warnings 
 				this.$v.reset()
       } catch (e) {}
     },
   },
 }
 </script>
-
-<style scoped>
-
-</style>

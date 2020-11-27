@@ -62,12 +62,14 @@
 </template>
 
 <script>
+// Importing different plugins for validating input fields
 import {required, minValue} from 'vuelidate/lib/validators'
 
 export default {
 	name: "CategoryEdit",
 
 	props: {
+		// Getting an array of categories from a main component with strict types 
 		categories: {
 			type: Array,
 			required: true
@@ -83,11 +85,13 @@ export default {
 		}
 	},
 
+	// Set up for validating our input fields
 	validations: {
     title: {required},
     limit: {minValue: minValue(100)}
 	},
-	
+
+	// We need this hook to set start information for input fields. 
 	created() {
 		const {id, title, limit} = this.categories[0]
 		this.current = id
@@ -95,11 +99,13 @@ export default {
 		this.limit = limit
 	},
 
+	// Fix bugs with animation in the limit field and select field
 	mounted() {
 		this.select = M.FormSelect.init(this.$refs.select)
 		M.updateTextFields()
 	},
 
+	// For optimization out application destroy select field
 	beforeDestroy() {
 		if (this.select && this.select.destroy) {
 			this.select.destroy()
@@ -120,6 +126,7 @@ export default {
 				limit: this.limit,
 			}
 			
+			// Update category data after edit 
 			try {
         const category = await this.$store.dispatch("refreshCategory", categoryData)
 				this.$emit("updated", categoryData)
@@ -137,7 +144,3 @@ export default {
 	}
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -101,7 +101,9 @@
 </template>
 
 <script>
+// Importing different plugins for validating input fields
 import {required, minValue} from 'vuelidate/lib/validators'
+// Getting some getters from vuex store 
 import {mapGetters} from 'vuex'
 
 export default {
@@ -119,28 +121,34 @@ export default {
 		}
 	},
 
+	// Set up for validating our input fields
 	validations: {
 		amount: {minValue: minValue(1)},
     description: {required}
 	},
 
 	async mounted() {
+		// We fill the array of categories with the received data from the database
 		this.categories = await this.$store.dispatch("fetchCategories")
 		this.loading = false 
 
+		// If array of categories not empty we send to select field some info about out categories
 		if (this.categories.length) {
 			this.category = this.categories[0].id
 		}
 		
+		// This timeout needed for optimization our application because without him we not to get field of select
 		setTimeout(() => {
 			this.select = M.FormSelect.init(this.$refs.select)
 			M.updateTextFields()
 		}, 0)
 	},
 
+	// Get the user info from store getters
 	computed: {
 		...mapGetters(["info"]),
 
+		// We check if we have enough money for any operation. return => true || false
 		canCreateRecord() {
 			if (this.type === "income") {
 				return true
@@ -151,6 +159,7 @@ export default {
 	},
 
 	methods: {
+		// Form validate
 		async handleSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch()
@@ -167,6 +176,7 @@ export default {
 						date: new Date().toJSON()
 					})	
 
+					// Checking if this operation is income or not and (bill + money || bill - money) =))
 					const bill = this.type === "income"
 						? this.info.bill + this.amount
 						: this.info.bill - this.amount 

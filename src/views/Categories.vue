@@ -43,6 +43,7 @@ export default {
 	},
 	
 	async mounted() {
+		// Get categories from store
 		this.categories = await this.$store.dispatch("fetchCategories")	
 		this.loading = false
 	},
