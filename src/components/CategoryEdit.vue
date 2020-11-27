@@ -32,7 +32,7 @@
 					 	class="helper-text invalid"
 						v-if="$v.title.$dirty && !$v.title.required"
 					>
-						TITLE
+						Enter a new category name
 					</span>
         </div>
 
@@ -48,7 +48,7 @@
 					 	class="helper-text invalid"
 						v-if="$v.limit.$dirty && !$v.limit.minValue"
 					>
-						LIMIT
+						Minimal limit -> {{$v.limit.$params.minValue.min}}
 					</span>
         </div>
 
