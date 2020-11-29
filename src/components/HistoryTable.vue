@@ -3,11 +3,11 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Сумма</th>
-        <th>Дата</th>
-        <th>Категория</th>
-        <th>Тип</th>
-        <th>Открыть</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Type</th>
+        <th>Open</th>
       </tr>
     </thead>
 

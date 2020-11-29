@@ -67,7 +67,7 @@
 					v-model.number="amount"
 					:class="{invalid: $v.amount.$dirty && !$v.amount.minValue}"
 				/>
-        <label for="amount">Sum</label>
+        <label for="amount">Amount</label>
         <span
 				 	class="helper-text invalid"
 					v-if="$v.amount.$dirty && !$v.amount.minValue"
