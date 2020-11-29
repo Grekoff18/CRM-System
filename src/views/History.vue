@@ -19,18 +19,27 @@
 		</p>
 
     <section v-else>
-			<HistoryTemplate
-				:records="records"
-			/>		
+			<HistoryTemplate :records="items"/>	
+
+			<Paginate
+				v-model="page"
+			 	:page-count="pageCount"
+				:click-handler="pageChengeHandler"
+				:container-class="'pagination'"
+				:page-class="'waves-effect'"
+			/>
 		</section>
   </div>
 </template>
 
 <script>
 import HistoryTemplate from '@/components/HistoryTable'
+import paginationMixin from '@/mixins/pagination.mixin'
 
 export default {
-  name: "history",
+	name: "history",
+	
+	mixins: [paginationMixin],
 
   components: {
 		HistoryTemplate
@@ -40,28 +49,33 @@ export default {
 	data() {
 		return {
 			loading: true,
-			records: [],
-			categories: [],
+			records: []
 		}
 	},
 
 	async mounted() {
 		// Get an array of records from database
-		// this.records = await this.$store.dispatch("fetchRecords")
-		const records = await this.$store.dispatch("fetchRecords")
+		this.records = await this.$store.dispatch("fetchRecords")
 		// Get an array of categories from database
-		this.categories = await this.$store.dispatch("fetchCategories")
+		const categories = await this.$store.dispatch("fetchCategories")
 
-		this.records = records.map(record => {
+		// Pagination setup through mixins
+		this.setupPagination(this.records.map(record => {
 				return {
 					...record,
-					categoryName: this.categories.find(c => c.id === record.categoryId).title,
+					categoryName: categories.find(c => c.id === record.categoryId).title,
 					typeClass: record.type === "income" ? "green" : "red",
 				}
 			}
-		)
+		))
 
 		this.loading = false
 	},
 };
 </script>
+
+<style>
+.pagination li a {
+	 outline: none;
+}
+</style>

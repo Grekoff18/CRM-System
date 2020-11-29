@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
+import Paginate from 'vuejs-paginate'
 import firebase from 'firebase/app'
 import App from './App.vue'
 import router from './router'
@@ -50,6 +51,7 @@ Vue.filter("currency", currencyFilter)
 
 // Register vue component
 Vue.component("Loader", Loader)
+Vue.component("Paginate", Paginate)
 
 // Register directives
 Vue.directive("tooltip", tooltipDirectives)
