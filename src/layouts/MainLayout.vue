@@ -50,7 +50,19 @@ export default {
       await this.$store.dispatch("fetchInfo")
     }
     this.loading = false
-  }
+	},
+	
+	computed: {
+		error() {
+			return this.$store.getters.error
+		}
+	},
+
+	watch: {
+		error(firebaseError) {
+			this.$error(firebaseError.message)	
+		}
+	},
 
 }
 
