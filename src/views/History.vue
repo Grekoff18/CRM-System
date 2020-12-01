@@ -5,7 +5,7 @@
     </div>
 
     <div class="history-chart">
-      <canvas></canvas>
+      <canvas ref="canvas"></canvas>
     </div>
 
 		<Loader v-if="loading"/>
@@ -35,21 +35,37 @@
 <script>
 import HistoryTemplate from '@/components/HistoryTable'
 import paginationMixin from '@/mixins/pagination.mixin'
+import {Pie} from 'vue-chartjs'
 
 export default {
 	name: "history",
+
+	extends: Pie,
 	
 	mixins: [paginationMixin],
 
   components: {
 		HistoryTemplate
-  
 	},
 
 	data() {
 		return {
 			loading: true,
-			records: []
+			records: [],
+			chartdata: {
+      	labels: ['January', 'February'],
+				datasets: [
+					{
+						label: 'Data One',
+						backgroundColor: '#f87979',
+						data: [40, 20]
+					}
+				]
+    	},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false
+			}
 		}
 	},
 
@@ -59,18 +75,63 @@ export default {
 		// Get an array of categories from database
 		const categories = await this.$store.dispatch("fetchCategories")
 
-		// Pagination setup through mixins
-		this.setupPagination(this.records.map(record => {
+		this.setup(categories)
+		this.loading = false
+	},
+
+	methods: {
+		setup(categories) {
+			// Pagination setup through mixins
+			this.setupPagination(this.records.map(record => {
 				return {
 					...record,
 					categoryName: categories.find(c => c.id === record.categoryId).title,
 					typeClass: record.type === "income" ? "green" : "red",
 				}
-			}
-		))
+			}))
 
-		this.loading = false
-	},
+			this.renderChart(
+			{
+      	labels: categories.map(c => c.title),
+				datasets: [
+					{
+						label: 'Outcome by category',
+						backgroundColor: categories.map(c => {
+							const spend = this.records
+								.filter(r => r.categoryId === c.id)
+								.filter(r => r.type === "outcome")
+								.reduce((total, record) => {
+									return total += Number(record.amount)
+								}, 0)
+
+								const percent = (100 * spend) / c.limit
+								const progresColor = percent < 60 
+									? "green"
+									: percent < 100
+										? "yellow"
+										: "red"
+
+								return `${progresColor}`
+						}),
+							
+						data: categories.map(c => {
+							return this.records.reduce((total, r) => {
+								if (r.categoryId === c.id && r.type === "outcome") {
+									total += Number(r.amount)
+								}	
+
+								return total
+							}, 0)
+						})
+					}
+				]
+			}, 
+			{
+				responsive: true,
+				maintainAspectRatio: false
+			})
+		}
+	}
 };
 </script>
 

@@ -14,6 +14,7 @@ export default {
 			this.$router.push(`${this.$route.path}?page=${page}`)
 			this.items = this.allItems[page - 1] || this.allItems[0]
 		},
+		
 		setupPagination(allItems, chunkSize = this.pageSize) {
 			if (chunkSize <= 0) return allItems
 			while (allItems.length) this.allItems.push(allItems.splice(0, chunkSize))

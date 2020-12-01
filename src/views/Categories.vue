@@ -8,7 +8,7 @@
 			<Loader v-if="loading"/>
 
       <div class="row" v-else>
-        <CategoryCreate @created="addNewCategory"/>
+       	<CategoryCreate @created="addNewCategory"/>
 
         <CategoryEdit
 					v-if="categories.length"
@@ -41,7 +41,7 @@ export default {
 			updateCount: 0
     }
 	},
-	
+
 	async mounted() {
 		// Get categories from store
 		this.categories = await this.$store.dispatch("fetchCategories")	
