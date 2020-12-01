@@ -13,5 +13,5 @@ export default function dateFilter(value, format="date") {
     options.second = "2-digit"
   }
 
-  return new Intl.DateTimeFormat("ru-RU", options).format(new Date())
+  return new Intl.DateTimeFormat("en-US", options).format(new Date())
 }

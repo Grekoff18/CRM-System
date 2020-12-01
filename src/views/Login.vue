@@ -13,11 +13,15 @@
                 <label for="email">Email</label>
                 <small
                   class="helper-text invalid"
-                  v-if="$v.email.$dirty && !$v.email.required">Enter your email
+                  v-if="$v.email.$dirty && !$v.email.required"
+								>
+									Enter your email
                 </small>
                 <small
                   class="helper-text invalid"
-                  v-else-if="$v.email.$dirty && !$v.email.email">Please enter correct email
+                  v-else-if="$v.email.$dirty && !$v.email.email"
+								>
+									Please enter correct email
                 </small>
             </div>
 
@@ -31,11 +35,15 @@
                 <label for="password">Пароль</label>
                 <small
                   class="helper-text invalid"
-                  v-if="$v.password.$dirty && !$v.password.required">Enter your password
+                  v-if="$v.password.$dirty && !$v.password.required"
+								>
+									Enter your password
                 </small>
                 <small
                   class="helper-text invalid"
-                  v-else-if="$v.password.$dirty && !$v.password.minLength">Password must be at least {{$v.password.$params.minLength.min}} characters. Now - {{password.length}}
+                  v-else-if="$v.password.$dirty && !$v.password.minLength"
+								>
+									Password must be at least {{$v.password.$params.minLength.min}} characters. Now - {{password.length}}
                 </small>
             </div>
 

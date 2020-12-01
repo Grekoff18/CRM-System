@@ -105,7 +105,7 @@ export default {
 								}, 0)
 
 								const percent = (100 * spend) / c.limit
-								const progresColor = percent < 60 
+								const progresColor = percent < 75 
 									? "green"
 									: percent < 100
 										? "yellow"
